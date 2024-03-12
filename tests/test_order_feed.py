@@ -1,5 +1,6 @@
 import allure
 
+from locators.main_page_locators import MainPageLocators
 from locators.order_feed_locators import OrderFeedLocators
 from pages.order_feed import OrderFeed
 #все тесты в хроме прошли, в фоксе нет
@@ -17,7 +18,7 @@ class TestOrderFeed:
     @allure.title('Проверка совпадения заказов в истории и в ленте')
     def test_orders_in_history_and_in_feed_are_similar(self, driver, authentication):
         order_feed = OrderFeed(driver)
-        order_feed.drag_and_drop()
+        order_feed.drag_and_drop(MainPageLocators.BURGER_INGREDIENT, MainPageLocators.PLACE_FOR_ORDER)
         order_feed.make_an_order()
         order_id = order_feed.get_order_id()
         order_feed.close_modal()
@@ -35,7 +36,7 @@ class TestOrderFeed:
         order_feed.go_to_order_feed()
         old_count = order_feed.get_total_order_count()
         order_feed.go_to_constructor()
-        order_feed.drag_and_drop()
+        order_feed.drag_and_drop(MainPageLocators.BURGER_INGREDIENT, MainPageLocators.PLACE_FOR_ORDER)
         order_feed.make_an_order()
         order_feed.close_modal()
         order_feed.go_to_order_feed()
@@ -49,7 +50,7 @@ class TestOrderFeed:
         order_feed.go_to_order_feed()
         old_count = order_feed.get_daily_order_count()
         order_feed.go_to_constructor()
-        order_feed.drag_and_drop()
+        order_feed.drag_and_drop(MainPageLocators.BURGER_INGREDIENT, MainPageLocators.PLACE_FOR_ORDER)
         order_feed.make_an_order()
         order_feed.close_modal()
         order_feed.go_to_order_feed()
@@ -61,7 +62,7 @@ class TestOrderFeed:
     def test_after_making_an_order_id_appears_in_the_process(self, driver, authentication):
         order_feed = OrderFeed(driver)
         order_feed.go_to_constructor()
-        order_feed.drag_and_drop()
+        order_feed.drag_and_drop(MainPageLocators.BURGER_INGREDIENT, MainPageLocators.PLACE_FOR_ORDER)
         order_feed.make_an_order()
         order_id = order_feed.get_order_id()
         order_feed.close_modal()

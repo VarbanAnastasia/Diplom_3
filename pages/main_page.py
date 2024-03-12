@@ -37,12 +37,6 @@ class MainPage(PersonalAccount):
         if self.find_element_located(MainPageLocators.CLOSE_CONFIRMATION):
             return True
 
-    @allure.step("Перетаскивание ингредиента")
-    def drag_and_drop(self):
-        drag = self.find_element_located(MainPageLocators.BURGER_INGREDIENT)
-        drop = self.find_element_located(MainPageLocators.PLACE_FOR_ORDER)
-        ActionChains(self.driver).drag_and_drop(drag, drop).perform()
-
     @allure.step("Получение количества ингредиентов")
     def number_of_ingredients(self):
         return self.find_element_located(MainPageLocators.NUMBER_OF_INGREDIENTS)

@@ -1,4 +1,5 @@
 import allure
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -46,3 +47,11 @@ class BasePage:
     @allure.step("Нахождение нескольких элементов")
     def find_until_all_elements_located(self, locator):
         return WebDriverWait(self.driver, 20).until(expected_conditions.presence_of_all_elements_located(locator))
+
+    @allure.step("Перетаскивание ингредиента")
+    def drag_and_drop(self, what, where):
+        drag = self.find_element_located(what)
+        drop = self.find_element_located(where)
+        ActionChains(self.driver).drag_and_drop(drag, drop).perform()
+
+
